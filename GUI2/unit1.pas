@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  ComCtrls, Types, Unit2, process, math,LCLType, IniFiles;
+  ComCtrls, Types, Unit2, process, math, LCLType, IniFiles;
 
 type
 
@@ -63,6 +63,13 @@ type
     procedure Image3MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
     procedure Image3Paint(Sender: TObject);
+    procedure Image3MouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure Image3MouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure Image3MouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+
     procedure Image4Click(Sender: TObject);
     procedure Image4DblClick(Sender: TObject);
     procedure Image4MouseDown(Sender: TObject; Button: TMouseButton;
@@ -103,7 +110,7 @@ type
   end;
 
 var
-  i: Integer;
+  i, j: Integer;
   Form1: TForm1;
   RunProgram: TProcess;
   slice_flag1,slice_flag2,slice_flag3:boolean; // Флаги для возможности выставления среза
@@ -166,26 +173,26 @@ begin
   y_ini := inif.ReadInteger('Position', 'Y', 0);
   w_ini := inif.ReadInteger('Size', 'W', 0);
   h_ini := inif.ReadInteger('Size', 'H', 0);
+  Const_sweep:=Round(LocalImWidth/2);
   Form1.Left:=x_ini;
   Form1.Top:=y_ini;
   Form1.Width:=w_ini;
   Form1.Height:=h_ini;
   ratio_const:= 0.5;
   Normed_len:= LocalImWidth * ratio_const;
-  x1:=Normed_len*Sqrt(2)/2;
-  x2:=Normed_len*Sqrt(2)/2;
-  x3:=-Normed_len*Sqrt(2)/2;
-  x4:=-Normed_len*Sqrt(2)/2;
-  y1:=Normed_len*Sqrt(2)/2;
-  y2:=-Normed_len*Sqrt(2)/2;
-  y3:=Normed_len*Sqrt(2)/2;
-  y4:=-Normed_len*Sqrt(2)/2;
-  z1:= 0;
-  z2:= 0;
-  z3:= 0;
-  z4:= 0;
+  x1:=Normed_len*Sqrt(2)/2+Const_sweep;
+  x2:=Normed_len*Sqrt(2)/2+Const_sweep;
+  x3:=-Normed_len*Sqrt(2)/2+Const_sweep;
+  x4:=-Normed_len*Sqrt(2)/2+Const_sweep;
+  y1:=Normed_len*Sqrt(2)/2+Const_sweep;
+  y2:=-Normed_len*Sqrt(2)/2+Const_sweep;
+  y3:=Normed_len*Sqrt(2)/2+Const_sweep;
+  y4:=-Normed_len*Sqrt(2)/2+Const_sweep;
+  z1:= 0+Const_sweep;
+  z2:= 0+Const_sweep;
+  z3:= 0+Const_sweep;
+  z4:= 0+Const_sweep;
   FlagDragAngle := 0;
-  Const_sweep:=Round(LocalImWidth/2);
 end;
 
 
@@ -261,12 +268,12 @@ begin
   if (ssCtrl in Shift) then begin
   //writeln(FStartPoint.Y, MemoryPos4.Y);
   if(FStartPoint.Y > MemoryPos2.Y) then begin
-  angle_y := angle_y-3.14159/100;
+  angle_y := -3.14159/1000;
   end
   else
   begin
   if(FStartPoint.Y < MemoryPos2.Y) then begin
-  angle_y := angle_y+3.14159/100;
+  angle_y := +3.14159/1000;
   end;
   rot_y[1][1] := Cos(angle_y);
   rot_y[3][3] := Cos(angle_y);
@@ -304,6 +311,9 @@ end;
 procedure TForm1.Image2MouseWheelDown(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
+  Image2.Invalidate;
+  Image3.Invalidate;
+  Image4.Invalidate;
   if (slice_flag2) then begin
   z1:=z1+5;
   z2:=z2+5;
@@ -315,6 +325,9 @@ end;
 procedure TForm1.Image2MouseWheelUp(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
+  Image2.Invalidate;
+  Image3.Invalidate;
+  Image4.Invalidate;
   if (slice_flag1) then begin
   z1:=z1-5;
   z2:=z2-5;
@@ -330,10 +343,10 @@ begin
 
   // Draw the line
   Image2.Canvas.Pen.Color := clRed; // Set line color to red
-  Image2.Canvas.Line(Round(y2+Const_sweep), Round(z2+Const_sweep), Round(y1+Const_sweep), Round(z1+Const_sweep));
-  Image2.Canvas.Line(Round(y3+Const_sweep), Round(z3+Const_sweep), Round(y1+Const_sweep), Round(z1+Const_sweep));
-  Image2.Canvas.Line(Round(y4+Const_sweep), Round(z4+Const_sweep), Round(y3+Const_sweep), Round(z3+Const_sweep));
-  Image2.Canvas.Line(Round(y4+Const_sweep), Round(z4+Const_sweep), Round(y2+Const_sweep), Round(z2+Const_sweep));
+  Image2.Canvas.Line(Round(y2), Round(z2), Round(y1), Round(z1));
+  Image2.Canvas.Line(Round(y3), Round(z3), Round(y1), Round(z1));
+  Image2.Canvas.Line(Round(y4), Round(z4), Round(y3), Round(z3));
+  Image2.Canvas.Line(Round(y4), Round(z4), Round(y2), Round(z2));
   if (imageNumber = 2) then begin
   Image3.OnPaint(Sender);
   Image4.OnPaint(Sender);
@@ -350,32 +363,44 @@ begin
   slice_flag3 := false;     // Блокирование выставления среза при двойном нажатии на картинку
 end;
 
+procedure TForm1.Image3MouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
 
-//procedure TForm1.Image3MouseWheelUp(Sender: TObject; Shift: TShiftState;
-//  MousePos: TPoint; var Handled: Boolean);
-//begin
-//  if (slice_flag1) then begin
-//  x1:=x1-5;
-//  x2:=x2-5;
-//  x3:=x3-5;
-//  x4:=x4-5;
+end;
+
+procedure TForm1.Image3MouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  imageNumber := 3;
+  Image2.Invalidate;
+  Image3.Invalidate;
+  Image4.Invalidate;
+  //if (slice_flag3) then begin
+  x1:=x1-5;
+  x2:=x2-5;
+  x3:=x3-5;
+  x4:=x4-5;
+  writeln(x1);
 //end;
+end;
+
+procedure TForm1.Image3MouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  imageNumber := 3;
+  Image2.Invalidate;
+  Image3.Invalidate;
+  Image4.Invalidate;
+  //if (slice_flag3) then begin
+  x1:=x1+5;
+  x2:=x2+5;
+  x3:=x3+5;
+  x4:=x4+5;
+  writeln(x1);
 //end;
-//
-//procedure TForm1.Image3MouseWheelUp(Sender: TObject; Shift: TShiftState;
-//  MousePos: TPoint; var Handled: Boolean);
-//begin
-//
-//
-//  if (slice_flag1) then begin
-//  z_slice := z_slice+5;
-//  z1:=z1+5;
-//  z2:=z2+5;
-//  z3:=z3+5;
-//  z4:=z4+5;
-//end;
-//
-//end;
+
+end;
 
 
 procedure TForm1.Image3MouseMove(Sender: TObject; Shift: TShiftState; X,       // Выставление среза во второй плоскости при движении мыши по картинке
@@ -383,14 +408,21 @@ procedure TForm1.Image3MouseMove(Sender: TObject; Shift: TShiftState; X,       /
 begin
   imageNumber :=3;
   if (slice_flag3) then begin
-  FEndPoint := Point(X, Y);
+  FStartPoint := Point(X, Y);
 
   // Forces a repaint
   Image2.Invalidate;
   Image3.Invalidate;
   Image4.Invalidate;
   if (ssCtrl in Shift) then begin
-  angle_z := angle_z-3.14159/50;
+
+  if(FStartPoint.Y > MemoryPos3.Y) then begin
+  angle_z := -3.14159/1000;
+  end
+  else
+  begin
+  if(FStartPoint.Y < MemoryPos3.Y) then begin
+  angle_z := +3.14159/1000;
   end;
   end;
   rot_z[1][1] := Cos(angle_z);
@@ -404,6 +436,9 @@ begin
   y2:= rot_z[2][1]*x2 + rot_z[2][2]*y2;
   x3:= rot_z[1][1]*x3 + rot_z[1][2]*y3;
   y3:= rot_z[2][1]*x3 + rot_z[2][2]*y3;
+  end;
+  end;
+  MemoryPos3:=FStartPoint;
 end;
 
 procedure TForm1.Image3Paint(Sender: TObject);
@@ -413,10 +448,10 @@ begin
 
   // Draw the line
   Image3.Canvas.Pen.Color := clRed; // Set line color to red
-  Image3.Canvas.Line(Round(x3+Const_sweep), Round(y3+Const_sweep), Round(x4+Const_sweep), Round(y4+Const_sweep));
-  Image3.Canvas.Line(Round(x2+Const_sweep), Round(y2+Const_sweep), Round(x1+Const_sweep), Round(y1+Const_sweep));
-  Image3.Canvas.Line(Round(x3+Const_sweep), Round(y3+Const_sweep), Round(x1+Const_sweep), Round(y1+Const_sweep));
-  Image3.Canvas.Line(Round(x4+Const_sweep), Round(y4+Const_sweep), Round(x2+Const_sweep), Round(y2+Const_sweep));
+  Image3.Canvas.Line(Round(x3), Round(y3), Round(x4), Round(y4));
+  Image3.Canvas.Line(Round(x2), Round(y2), Round(x1), Round(y1));
+  Image3.Canvas.Line(Round(x3), Round(y3), Round(x1), Round(y1));
+  Image3.Canvas.Line(Round(x4), Round(y4), Round(x2), Round(y2));
   if (imageNumber = 3) then begin
   Image2.OnPaint(Sender);
   Image4.OnPaint(Sender);
@@ -457,13 +492,13 @@ begin
   if (ssCtrl in Shift) then begin
   //writeln(FStartPoint.Y, MemoryPos4.Y);
   if(FStartPoint.Y > MemoryPos4.Y) then begin
-  angle_x := angle_x-3.14159/100;
+  angle_x := -3.14159/100;
   writeln(angle_x);
   end
   else
   begin
   if(FStartPoint.Y < MemoryPos4.Y) then begin
-  angle_x := angle_x+3.14159/100;
+  angle_x := +3.14159/100;
   writeln(angle_x);
   end;
   rot_x[2][2] := Cos(angle_x);
@@ -498,25 +533,31 @@ end;
 procedure TForm1.Image4MouseWheelDown(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
+  imageNumber := 4;
+  Image2.Invalidate;
+  Image3.Invalidate;
+  Image4.Invalidate;
   if (slice_flag1) then begin
   z1:=z1+5;
   z2:=z2+5;
   z3:=z3+5;
   z4:=z4+5;
 end;
-
 end;
 
 procedure TForm1.Image4MouseWheelUp(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
+  imageNumber := 4;
+  Image2.Invalidate;
+  Image3.Invalidate;
+  Image4.Invalidate;
   if (slice_flag1) then begin
   z1:=z1-5;
   z2:=z2-5;
   z3:=z3-5;
   z4:=z4-5;
 end;
-
 end;
 
 procedure TForm1.Image4Paint(Sender: TObject);
@@ -526,10 +567,10 @@ begin
 
   // Draw the line
   Image4.Canvas.Pen.Color := clRed; // Set line color to red
-  Image4.Canvas.Line(Round(x2+Const_sweep), Round(z2+Const_sweep), Round(x3+Const_sweep), Round(z3+Const_sweep));
-  Image4.Canvas.Line(Round(x3+Const_sweep), Round(z3+Const_sweep), Round(x4+Const_sweep), Round(z4+Const_sweep));
-  Image4.Canvas.Line(Round(x4+Const_sweep), Round(z4+Const_sweep), Round(x1+Const_sweep), Round(z1+Const_sweep));
-  Image4.Canvas.Line(Round(x1+Const_sweep), Round(z1+Const_sweep), Round(x2+Const_sweep), Round(z2+Const_sweep));
+  Image4.Canvas.Line(Round(x2), Round(z2), Round(x3), Round(z3));
+  Image4.Canvas.Line(Round(x3), Round(z3), Round(x4), Round(z4));
+  Image4.Canvas.Line(Round(x4), Round(z4), Round(x1), Round(z1));
+  Image4.Canvas.Line(Round(x1), Round(z1), Round(x2), Round(z2));
   if (imageNumber = 4) then begin
   Image2.OnPaint(Sender);
   Image3.OnPaint(Sender);
@@ -591,18 +632,42 @@ begin
   Listbox4.clear;
   Listbox1.ItemIndex:=0;
   Listbox2.ItemIndex:=0;
-  x1:=Normed_len*Sqrt(2)/2;
-  x2:=Normed_len*Sqrt(2)/2;
-  x3:=-Normed_len*Sqrt(2)/2;
-  x4:=-Normed_len*Sqrt(2)/2;
-  y1:=Normed_len*Sqrt(2)/2;
-  y2:=-Normed_len*Sqrt(2)/2;
-  y3:=Normed_len*Sqrt(2)/2;
-  y4:=-Normed_len*Sqrt(2)/2;
-  z1:= 0;
-  z2:= 0;
-  z3:= 0;
-  z4:= 0;
+  x1:=Normed_len*Sqrt(2)/2+Const_sweep;
+  x2:=Normed_len*Sqrt(2)/2+Const_sweep;
+  x3:=-Normed_len*Sqrt(2)/2+Const_sweep;
+  x4:=-Normed_len*Sqrt(2)/2+Const_sweep;
+  y1:=Normed_len*Sqrt(2)/2+Const_sweep;
+  y2:=-Normed_len*Sqrt(2)/2+Const_sweep;
+  y3:=Normed_len*Sqrt(2)/2+Const_sweep;
+  y4:=-Normed_len*Sqrt(2)/2+Const_sweep;
+  z1:= 0+Const_sweep;
+  z2:= 0+Const_sweep;
+  z3:= 0+Const_sweep;
+  z4:= 0+Const_sweep;
+  angle_x:=0;
+  angle_z:=0;
+  angle_y:=0;
+  for i := 1 to 3 do
+      begin
+      for j := 1 to 3 do
+          if (i=j) then begin
+             rot_x[i][j] := 1;
+             rot_y[i][j] := 1;
+             rot_z[i][j] := 1;
+          end
+          else
+          begin
+             rot_x[i][j] := 0;
+             rot_y[i][j] := 0;
+             rot_z[i][j] := 0;
+          end;
+          end;
+   for i:=1 to 3 do
+          writeln(rot_x[i][1],rot_x[i][2],rot_x[i][3]);
+   for i:=1 to 3 do
+          writeln(rot_y[i][1],rot_y[i][2],rot_y[i][3]);
+   for i:=1 to 3 do
+          writeln(rot_z[i][1],rot_z[i][2],rot_z[i][3]);
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);
