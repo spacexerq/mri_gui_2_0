@@ -1,7 +1,7 @@
 unit Unit1;
 
 {$mode objfpc}{$H+}
-{$APPTYPE CONSOLE}
+//{$APPTYPE CONSOLE}
 
 interface
 
@@ -128,7 +128,7 @@ var
   x1, x2, x3, x4: Float;
   y1, y2, y3, y4: Float;
   z1, z2, z3, z4: Float;
-  Normed_len, ratio_const: Float;
+  Normed_len, ratio_const, rotation_scale: Float;
   FStartPointX, FStartPointY: Integer;
   FlagDragAngle: Integer;
 
@@ -143,6 +143,7 @@ const
   ImageHeight = 600;
   Const_sweepW =Round(LocalImWidth/2);
   Const_sweepH =Round(LocalImHeght/2);
+  rotation_scale = 400;
 implementation
 type MatrType = array [1..3] of array [1..3] of Float;
 type VectorType = array [1..3] of Float;
@@ -153,50 +154,32 @@ var
 { TForm1 }
 
 
-function matmul(var matrix: MatrType; var vector: VectorType): VectorType;
-var ResArr:VectorType;
-    begin
-      ResArr[1]:=matrix[1][1]*vector[1]+matrix[1][2]*vector[2]+matrix[1][3]*vector[3];
-      ResArr[2]:=matrix[2][1]*vector[1]+matrix[2][2]*vector[2]+matrix[2][3]*vector[3];
-      ResArr[3]:=matrix[3][1]*vector[1]+matrix[3][2]*vector[2]+matrix[3][3]*vector[3];
-      matmul:=ResArr;
-    end;
-
-function plCw(var temp: Float): Float;
-begin
-     plCw:=temp+Const_sweepW;
-end;
-
-function mnCw(var temp: Float): Float;
-begin
-     mnCw:=temp-Const_sweepW;
-end;
-
-function plCh(var temp: Float): Float;
-begin
-     plCh:=temp+Const_sweepH;
-end;
-
-function mnCh(var temp: Float): Float;
-begin
-     mnCh:=temp-Const_sweepH;
-end;
-
-
-function rotation_mat(var angle: Float; var vec: VectorType): MatrType;
-var ResMat:MatrType;
-  begin
-     ResMat[1][1]:=Cos(angle)+(1-cos(angle))*vec[1]*vec[1];
-     ResMat[2][1]:=(1-Cos(angle))*vec[2]*vec[3]+Sin(angle)*vec[3];
-     ResMat[3][1]:=(1-Cos(angle))*vec[3]*vec[1]-Sin(angle)*vec[2];
-     ResMat[1][2]:=(1-Cos(angle))*vec[1]*vec[2]-Sin(angle)*vec[3];
-     ResMat[2][2]:=Cos(angle)+(1-Cos(angle))*vec[2]*vec[2];
-     ResMat[3][2]:=(1-Cos(angle))*vec[3]*vec[2]+Sin(angle)*vec[1];
-     ResMat[1][3]:=(1-Cos(angle))*vec[1]*vec[3]+Sin(angle)*vec[2];
-     ResMat[1][3]:=(1-Cos(angle))*vec[2]*vec[3]-Sin(angle)*vec[1];
-     ResMat[3][3]:=Cos(angle)+(1-Cos(angle))*vec[3]*vec[3];
-     rotation_mat:=ResMat;
-  end;
+//Next possible type of realisation to convert vectors and matrices to the most useful dType
+//
+//
+//function matmul(var matrix: MatrType; var vector: VectorType): VectorType;
+//var ResArr:VectorType;
+//    begin
+//      ResArr[1]:=matrix[1][1]*vector[1]+matrix[1][2]*vector[2]+matrix[1][3]*vector[3];
+//      ResArr[2]:=matrix[2][1]*vector[1]+matrix[2][2]*vector[2]+matrix[2][3]*vector[3];
+//      ResArr[3]:=matrix[3][1]*vector[1]+matrix[3][2]*vector[2]+matrix[3][3]*vector[3];
+//      matmul:=ResArr;
+//    end;
+//
+//function rotation_mat(var angle: Float; var vec: VectorType): MatrType;
+//var ResMat:MatrType;
+//  begin
+//     ResMat[1][1]:=Cos(angle)+(1-cos(angle))*vec[1]*vec[1];
+//     ResMat[2][1]:=(1-Cos(angle))*vec[2]*vec[3]+Sin(angle)*vec[3];
+//     ResMat[3][1]:=(1-Cos(angle))*vec[3]*vec[1]-Sin(angle)*vec[2];
+//     ResMat[1][2]:=(1-Cos(angle))*vec[1]*vec[2]-Sin(angle)*vec[3];
+//     ResMat[2][2]:=Cos(angle)+(1-Cos(angle))*vec[2]*vec[2];
+//     ResMat[3][2]:=(1-Cos(angle))*vec[3]*vec[2]+Sin(angle)*vec[1];
+//     ResMat[1][3]:=(1-Cos(angle))*vec[1]*vec[3]+Sin(angle)*vec[2];
+//     ResMat[1][3]:=(1-Cos(angle))*vec[2]*vec[3]-Sin(angle)*vec[1];
+//     ResMat[3][3]:=Cos(angle)+(1-Cos(angle))*vec[3]*vec[3];
+//     rotation_mat:=ResMat;
+//  end;
 
 procedure TForm1.ListBox4Click(Sender: TObject);
 begin
@@ -312,21 +295,21 @@ begin
   Image2.Invalidate;
   Image3.Invalidate;
   Image4.Invalidate;
-
+  //Memorize prev mouse position and compare to now
+  //
   if (ssCtrl in Shift) then begin
   if(FStartPoint.Y > MemoryPos2.Y)or
   (FStartPoint.X < MemoryPos2.X) then begin
-  angle_x := -3.14159/500;
+  angle_x := -3.14159/rotation_scale;
   end
   else
   begin
-  angle_x := +3.14159/500;
+  angle_x := +3.14159/rotation_scale;
   end;
   rot_x[1][1] := Cos(angle_x);
   rot_x[3][3] := Cos(angle_x);
   rot_x[1][3] := Sin(angle_x);
   rot_x[3][1] := -Sin(angle_x);
-  // добавление угла 10 градусов по часовой стрелке
   x1:= rot_x[1][1]*x1 - rot_x[1][3]*z1;
   z1:= rot_x[3][1]*x1 + rot_x[3][3]*z1;
   x2:= rot_x[1][1]*x2 - rot_x[1][3]*z2;
@@ -335,10 +318,6 @@ begin
   z3:= rot_x[3][1]*x3 + rot_x[3][3]*z3;
   x4:= rot_x[1][1]*x4 - rot_x[1][3]*z4;
   z4:= rot_x[3][1]*x4 + rot_x[3][3]*z4;
-
-  //x1:=plC(x1); x2:=plC(x2); x3:=plC(x3); x4:=plC(x4);
-  //y1:=plC(x1); y2:=plC(x2); y3:=plC(x3); y4:=plC(x4);
-  //z1:=plC(z1); z2:=plC(x2); z3:=plC(z3); z4:=plC(z4);
   end;
   MemoryPos2:=FStartPoint;
   end;
@@ -463,47 +442,16 @@ begin
 
   if(FStartPoint.Y > MemoryPos3.Y) or
   (FStartPoint.X < MemoryPos3.X) then begin
-  angle_z := -3.14159/500;
+  angle_z := -3.14159/rotation_scale;
   end
   else
   begin
-  angle_z := +3.14159/500;
+  angle_z := +3.14159/rotation_scale;
   end;
-  //zAxisSw[1]:=Abs((x4-x1)/2);
-  //zAxisSw[2]:=Abs((y4-y1)/2);
-  //zAxisSw[3]:=0;
-  //Rotation:=rotation_mat(angle_z, zAxisSw);
-  //
-  //TempVec[1]:=x1;
-  //TempVec[2]:=y1;
-  //TempVec[3]:=z1;
-  //
-  //ResVec:=matmul(Rotation,TempVec);
-  //x1:=ResVec[1];
-  //y1:=ResVec[2];
-  //z1:=ResVec[3];
-  //TempVec[1]:=x2;
-  //TempVec[2]:=y2;
-  //TempVec[3]:=z2;
-  //ResVec:=matmul(Rotation,TempVec);
-  //x2:=ResVec[1];
-  //y2:=ResVec[2];
-  //z2:=ResVec[3];
-  //TempVec[1]:=x3;
-  //TempVec[2]:=y3;
-  //TempVec[3]:=z3;
-  //ResVec:=matmul(Rotation,TempVec);
-  //x3:=ResVec[1];
-  //y3:=ResVec[2];
-  //z3:=ResVec[3];
-
-
   rot_z[1][1] := Cos(angle_z);
   rot_z[2][2] := Cos(angle_z);
   rot_z[1][2] := Sin(angle_z);
   rot_z[2][1] := -Sin(angle_z);
-  // добавление угла 10 градусов по часовой стрелке
-
   x1:= rot_z[1][1]*x1 + rot_z[1][2]*y1;
   y1:= rot_z[2][1]*x1 + rot_z[2][2]*y1;
   x2:= rot_z[1][1]*x2 + rot_z[1][2]*y2;
@@ -512,9 +460,6 @@ begin
   y3:= rot_z[2][1]*x3 + rot_z[2][2]*y3;
   x4:= rot_z[1][1]*x4 + rot_z[1][2]*y4;
   y4:= rot_z[2][1]*x4 + rot_z[2][2]*y4;
-  //x1:=plC(x1); x2:=plC(x2); x3:=plC(x3); x4:=plC(x4);
-  //y1:=plC(y1); y2:=plC(y2); y3:=plC(y3); y4:=plC(y4);
-  //z1:=plC(z1); z2:=plC(z2); z3:=plC(z3); z4:=plC(z4);
   end;
   MemoryPos3:=FStartPoint;
   end;
@@ -524,9 +469,9 @@ procedure TForm1.Image3Paint(Sender: TObject);
 begin
   // Draw the PNG file onto the TImage
   Image3.Canvas.Draw(0, 0, Image3.Picture.Graphic);
-
-  // Draw the line
-  Image3.Canvas.Pen.Color := clRed; // Set line color to red
+  // Set line color to red
+  Image3.Canvas.Pen.Color := clRed;
+  //drawing slice as rectangle
   Image3.Canvas.Line(Round(x3+Const_sweepW), Round(y3+Const_sweepH), Round(x4+Const_sweepW), Round(y4+Const_sweepH));
   Image3.Canvas.Line(Round(x2+Const_sweepW), Round(y2+Const_sweepH), Round(x1+Const_sweepW), Round(y1+Const_sweepH));
   Image3.Canvas.Line(Round(x3+Const_sweepW), Round(y3+Const_sweepH), Round(x1+Const_sweepW), Round(y1+Const_sweepH));
@@ -561,9 +506,7 @@ begin
   FStartPoint := Point(X, Y);
   imageNumber := 4;
   if (slice_flag1) then begin
-
-  // Запоминаем положение мыши
-  // Я так понял для обновления
+  //Refresh
   Image2.Invalidate;
   Image3.Invalidate;
   Image4.Invalidate;
@@ -571,17 +514,16 @@ begin
   if (ssCtrl in Shift) then begin
   if(FStartPoint.Y > MemoryPos4.Y)or
   (FStartPoint.X < MemoryPos4.X) then begin
-  angle_y := -3.14159/500;
+  angle_y := -3.14159/rotation_scale;
   end
   else
   begin
-  angle_y := +3.14159/500;
+  angle_y := +3.14159/rotation_scale;
   end;
   rot_y[2][2] := Cos(angle_y);
   rot_y[3][3] := Cos(angle_y);
   rot_y[2][3] := -Sin(angle_y);
   rot_y[3][2] := Sin(angle_y);
-  // добавление угла 10 градусов по часовой стрелке
   y1:= rot_y[2][2]*y1 + rot_y[3][2]*z1;
   z1:= rot_y[2][3]*y1 + rot_y[3][3]*z1;
   y2:= rot_y[2][2]*y2 + rot_y[3][2]*z2;
@@ -590,9 +532,6 @@ begin
   z3:= rot_y[2][3]*y3 + rot_y[3][3]*z3;
   y4:= rot_y[2][2]*y4 + rot_y[3][2]*z4;
   z4:= rot_y[2][3]*y4 + rot_y[3][3]*z4;
-  //x1:=plC(x1); x2:=plC(x2); x3:=plC(x3); x4:=plC(x4);
-  //y1:=plC(y1); y2:=plC(y2); y3:=plC(y3); y4:=plC(y4);
-  //z1:=plC(z1); z2:=plC(z2); z3:=plC(z3); z4:=plC(z4);
   end;
   MemoryPos4:=FStartPoint;
   end;
@@ -644,9 +583,8 @@ procedure TForm1.Image4Paint(Sender: TObject);
 begin
   // Draw the PNG file onto the TImage
   Image4.Canvas.Draw(0, 0, Image4.Picture.Graphic);
-
-  // Draw the line
-  Image4.Canvas.Pen.Color := clRed; // Set line color to red
+  // Set line color to red
+  Image4.Canvas.Pen.Color := clRed;
   Image4.Canvas.Line(Round(x2+Const_sweepW), Round(z2+Const_sweepH), Round(x4+Const_sweepW), Round(z4+Const_sweepH));
   Image4.Canvas.Line(Round(x3+Const_sweepW), Round(z3+Const_sweepH), Round(x4+Const_sweepW), Round(z4+Const_sweepH));
   Image4.Canvas.Line(Round(x3+Const_sweepW), Round(z3+Const_sweepH), Round(x1+Const_sweepW), Round(z1+Const_sweepH));
@@ -707,23 +645,23 @@ begin
 
 end;
 
-procedure TForm1.Button3Click(Sender: TObject);      // Первоначальное отображение плоскостей и срезов
+procedure TForm1.Button3Click(Sender: TObject);      // "Cancel" button
 begin
   Listbox4.clear;
   Listbox1.ItemIndex:=0;
   Listbox2.ItemIndex:=0;
-  x1:=Normed_len*Sqrt(2)/2+Const_sweep;
-  x2:=Normed_len*Sqrt(2)/2+Const_sweep;
-  x3:=-Normed_len*Sqrt(2)/2+Const_sweep;
-  x4:=-Normed_len*Sqrt(2)/2+Const_sweep;
-  y1:=Normed_len*Sqrt(2)/2+Const_sweep;
-  y2:=-Normed_len*Sqrt(2)/2+Const_sweep;
-  y3:=Normed_len*Sqrt(2)/2+Const_sweep;
-  y4:=-Normed_len*Sqrt(2)/2+Const_sweep;
-  z1:= 0+Const_sweep;
-  z2:= 0+Const_sweep;
-  z3:= 0+Const_sweep;
-  z4:= 0+Const_sweep;
+  x1:=Normed_len*Sqrt(2)/2;
+  x2:=Normed_len*Sqrt(2)/2;
+  x3:=-Normed_len*Sqrt(2)/2;
+  x4:=-Normed_len*Sqrt(2)/2;
+  y1:=Normed_len*Sqrt(2)/2;
+  y2:=-Normed_len*Sqrt(2)/2;
+  y3:=Normed_len*Sqrt(2)/2;
+  y4:=-Normed_len*Sqrt(2)/2;
+  z1:= 0;
+  z2:= 0;
+  z3:= 0;
+  z4:= 0;
   angle_x:=0;
   angle_z:=0;
   angle_y:=0;
@@ -742,12 +680,6 @@ begin
              rot_z[i][j] := 0;
           end;
           end;
-   for i:=1 to 3 do
-          writeln(rot_x[i][1],rot_x[i][2],rot_x[i][3]);
-   for i:=1 to 3 do
-          writeln(rot_y[i][1],rot_y[i][2],rot_y[i][3]);
-   for i:=1 to 3 do
-          writeln(rot_z[i][1],rot_z[i][2],rot_z[i][3]);
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);
@@ -760,7 +692,7 @@ begin
   Listbox4.ItemIndex:=Listbox4.ItemIndex+1;
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.Button1Click(Sender: TObject); //"Scan" button
 var
   Picture2, Picture3, Picture4: TPicture;
 begin
@@ -803,7 +735,7 @@ end;
 
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TForm1.Button2Click(Sender: TObject); //Rotation matrices output
 begin
   Assignfile(Slice_pos_file,'Slice_pos_file.txt');
   try
