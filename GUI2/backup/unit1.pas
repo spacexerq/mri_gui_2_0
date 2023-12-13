@@ -128,7 +128,7 @@ var
   x1, x2, x3, x4: Float;
   y1, y2, y3, y4: Float;
   z1, z2, z3, z4: Float;
-  Normed_len, ratio_const, rotation_scale: Float;
+  Normed_len, ratio_const: Float;
   FStartPointX, FStartPointY: Integer;
   FlagDragAngle: Integer;
 
@@ -708,11 +708,11 @@ begin
      rot_y[3][3]:=1;
      rot_z[2][2]:=1;
      rot_z[3][3]:=1;
-     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'0'+'.png';
+     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'0'+'.jpg';
      image4.Picture.LoadFromFile(Imagename);
-     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'1'+'.png';
+     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'1'+'.jpg';
      image2.Picture.LoadFromFile(Imagename);
-     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'2'+'.png';
+     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'2'+'.jpg';
      image3.Picture.LoadFromFile(Imagename);
      slice_flag1 := true;
      slice_flag2 := true;
