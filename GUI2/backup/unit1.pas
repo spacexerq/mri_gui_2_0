@@ -125,8 +125,8 @@ var
   current_slice,num_of_slices: Integer;        // Номер текущего среза, общее число срезов
   Imagename : string;                          // Имя файла с необходимым фото
   rot_x, rot_y, rot_z : array [1..3] of array [1..3] of Float; //Rotation matrices
-  x1, x2, x3, x4: Float;
-  y1, y2, y3, y4: Float;
+  x1, x2, x3, x4, dx: Float;
+  y1, y2, y3, y4, dy: Float;
   z1, z2, z3, z4: Float;
   Normed_len, ratio_const: Float;
   FStartPointX, FStartPointY: Integer;
@@ -461,6 +461,18 @@ begin
   x4:= rot_z[1][1]*x4 + rot_z[1][2]*y4;
   y4:= rot_z[2][1]*x4 + rot_z[2][2]*y4;
   end;
+  if (ssLeft in Shift) then begin
+     dx := FStartPoint.X - MemoryPos3.X;
+     dy := FStartPoint.Y - MemoryPos3.Y;
+     x1 := x1 + dx;
+     x2 := x2 + dx;
+     x3 := x3 + dx;
+     x4 := x4 + dx;
+     y1 := y1 + dy;
+     y2 := y2 + dy;
+     y3 := y3 + dy;
+     y4 := y4 + dy;
+  end;
   MemoryPos3:=FStartPoint;
   end;
 end;
@@ -532,6 +544,18 @@ begin
   z3:= rot_y[2][3]*y3 + rot_y[3][3]*z3;
   y4:= rot_y[2][2]*y4 + rot_y[3][2]*z4;
   z4:= rot_y[2][3]*y4 + rot_y[3][3]*z4;
+  end;
+  if (ssLeft in Shift) then begin
+     dx := FStartPoint.X - MemoryPos4.X;
+     dy := FStartPoint.Y - MemoryPos4.Y;
+     x1 := x1 + dx;
+     x2 := x2 + dx;
+     x3 := x3 + dx;
+     x4 := x4 + dx;
+     z1 := z1 + dy;
+     z2 := z2 + dy;
+     z3 := z3 + dy;
+     z4 := z4 + dy;
   end;
   MemoryPos4:=FStartPoint;
   end;
@@ -708,11 +732,11 @@ begin
      rot_y[3][3]:=1;
      rot_z[2][2]:=1;
      rot_z[3][3]:=1;
-     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'0'+'.jpg';
+     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'0'+'.png';
      image4.Picture.LoadFromFile(Imagename);
-     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'1'+'.jpg';
+     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'1'+'.png';
      image2.Picture.LoadFromFile(Imagename);
-     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'2'+'.jpg';
+     Imagename := 'MRI_test_' + IntToStr(current_slice)+'_'+'2'+'.png';
      image3.Picture.LoadFromFile(Imagename);
      slice_flag1 := true;
      slice_flag2 := true;
