@@ -23,6 +23,10 @@ type
     Button6: TButton;
     Button7: TButton;
     Button8: TButton;
+    ax: TEdit;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
     Image2: TImage;
     Image3: TImage;
     Image4: TImage;
@@ -33,6 +37,10 @@ type
     ListBox2: TListBox;
     ListBox3: TListBox;
     ListBox4: TListBox;
+    Scan_bar: TProgressBar;
+    bar_timer: TTimer;
+    procedure bar_timerStartTimer(Sender: TObject);
+    procedure bar_timerTimer(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -40,7 +48,10 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure axChange(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
     procedure Edit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Edit2Change(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: char);
     procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
@@ -102,6 +113,8 @@ type
     procedure ListBox4Click(Sender: TObject);
     procedure ListBox4DblClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Scan_barContextPopup(Sender: TObject; MousePos: TPoint;
+      var Handled: Boolean);
 
 
   private
@@ -116,7 +129,8 @@ var
   RunProgram: TProcess;
   slice_flag1,slice_flag2,slice_flag3:boolean; // Флаги для возможности выставления среза
   x_sw, y_sw, z_sw: Integer;                         // смещение при выставлении среза в трех проекциях
-  angle1, angle2, angle3: Float;               // углы поворота при выставлении среза в трех проекциях, меняются при нажатии на cntrl на 10 градусов
+  angle1, angle2, angle3: Float;                     // углы поворота при выставлении среза в трех проекциях, меняются при нажатии на cntrl на 10 градусов
+  curr_angle_x, curr_angle_y, curr_angle_z: Float;
   x_slice, y_slice, z_slice: Integer;
   angle_x, angle_y, angle_z: Float;
   Button:TMouseButton;                         // хранит нажатые на мыши клавиши(левая, правая кнопка, средняя кнопка)
@@ -226,6 +240,12 @@ begin
   FlagDragAngle := 0;
 end;
 
+procedure TForm1.Scan_barContextPopup(Sender: TObject; MousePos: TPoint;
+  var Handled: Boolean);
+begin
+
+end;
+
 
 
 procedure TForm1.Button7Click(Sender: TObject);            // Добавление нового протокола в текущее исследование
@@ -240,8 +260,23 @@ begin
         ListBox4.Items.Delete(ListBox4.ItemIndex);
 end;
 
+procedure TForm1.axChange(Sender: TObject);
+begin
+
+end;
+
+procedure TForm1.Edit1Change(Sender: TObject);
+begin
+
+end;
+
 procedure TForm1.Edit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
   );
+begin
+
+end;
+
+procedure TForm1.Edit2Change(Sender: TObject);
 begin
 
 end;
@@ -306,6 +341,8 @@ begin
   begin
   angle_x := +3.14159/rotation_scale;
   end;
+  curr_angle_x := curr_angle_x + angle_x/3.14159*360;
+  Edit2.Caption:=IntToStr(Round(curr_angle_x));
   rot_x[1][1] := Cos(angle_x);
   rot_x[3][3] := Cos(angle_x);
   rot_x[1][3] := Sin(angle_x);
@@ -448,6 +485,8 @@ begin
   begin
   angle_z := +3.14159/rotation_scale;
   end;
+  curr_angle_z := curr_angle_z + angle_z/3.14159*360;
+  Edit3.Caption:=IntToStr(Round(curr_angle_z));
   rot_z[1][1] := Cos(angle_z);
   rot_z[2][2] := Cos(angle_z);
   rot_z[1][2] := Sin(angle_z);
@@ -520,6 +559,9 @@ begin
   begin
   angle_y := +3.14159/rotation_scale;
   end;
+  curr_angle_y := curr_angle_y + angle_y/3.14159*360;
+  Edit1.Caption:=IntToStr(Round(curr_angle_y));
+
   rot_y[2][2] := Cos(angle_y);
   rot_y[3][3] := Cos(angle_y);
   rot_y[2][3] := -Sin(angle_y);
@@ -680,6 +722,9 @@ begin
              rot_z[i][j] := 0;
           end;
           end;
+  bar_timer.Enabled:=false;
+  Scan_bar.Position:=0;
+
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);
@@ -718,6 +763,7 @@ begin
      slice_flag2 := true;
      slice_flag3 := true;
      imageNumber := 0;
+     bar_timer.Enabled:=true;
 
 
      // Draw the picture on the TImage
@@ -732,6 +778,16 @@ begin
      finally
             CloseFile(Slice_num_file);
 end;
+
+end;
+
+procedure TForm1.bar_timerTimer(Sender: TObject);
+begin
+  Scan_bar.Position := Scan_bar.Position + 10;
+end;
+
+procedure TForm1.bar_timerStartTimer(Sender: TObject);
+begin
 
 end;
 
