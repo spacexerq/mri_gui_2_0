@@ -12,7 +12,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="116"/>
+        <UsageCount Value="118"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -22,9 +22,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="301"/>
-        <CursorPos X="3" Y="303"/>
-        <UsageCount Value="116"/>
+        <TopLine Value="199"/>
+        <CursorPos X="29" Y="372"/>
+        <UsageCount Value="118"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -37,7 +37,7 @@
         <UnitName Value="Unit2"/>
         <EditorIndex Value="1"/>
         <CursorPos X="33" Y="52"/>
-        <UsageCount Value="109"/>
+        <UsageCount Value="111"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -77,7 +77,7 @@
         <UsageCount Value="7"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="25">
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="712" Column="34" TopLine="691"/>
@@ -136,10 +136,6 @@
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="337" Column="32" TopLine="697"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
         <Caret Line="344" Column="32" TopLine="327"/>
       </Position>
       <Position>
@@ -148,19 +144,7 @@
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="343" Column="38" TopLine="432"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
         <Caret Line="559" Column="37" TopLine="556"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="343" Column="3" TopLine="607"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="732" TopLine="756"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>
