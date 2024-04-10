@@ -341,7 +341,7 @@ begin
   begin
   angle_x := +3.14159/rotation_scale;
   end;
-  curr_angle_x := curr_angle_x + angle_x/3.14159*360;
+  curr_angle_x := (curr_angle_x + angle_x/3.14159*360) mod 360;
   Edit2.Caption:=IntToStr(Round(curr_angle_x));
   rot_x[1][1] := Cos(angle_x);
   rot_x[3][3] := Cos(angle_x);
@@ -369,6 +369,7 @@ begin
      z3 := z3 + dy;
      z4 := z4 + dy;
   end;
+  MemoryPos2 := FStartPoint;
   end;
 end;
 
@@ -497,7 +498,7 @@ begin
   begin
   angle_z := +3.14159/rotation_scale;
   end;
-  curr_angle_z := curr_angle_z + angle_z/3.14159*360;
+  curr_angle_z := (curr_angle_z + angle_z/3.14159*360) mod 360;
   Edit3.Caption:=IntToStr(Round(curr_angle_z));
   rot_z[1][1] := Cos(angle_z);
   rot_z[2][2] := Cos(angle_z);
