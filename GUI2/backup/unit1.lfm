@@ -1,14 +1,14 @@
 object Form1: TForm1
-  Left = 342
+  Left = 0
   Height = 974
-  Top = 176
+  Top = 132
   Width = 1920
   HorzScrollBar.Page = 944
   VertScrollBar.Page = 974
   AutoScroll = True
   Caption = 'Form1'
-  ClientHeight = 974
-  ClientWidth = 1894
+  ClientHeight = 0
+  ClientWidth = 0
   DesignTimePPI = 144
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown

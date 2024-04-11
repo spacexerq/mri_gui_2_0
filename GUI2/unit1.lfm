@@ -1,32 +1,31 @@
 object Form1: TForm1
   Left = 0
-  Height = 974
+  Height = 649
   Top = 132
-  Width = 1920
-  HorzScrollBar.Page = 944
-  VertScrollBar.Page = 974
+  Width = 1280
+  HorzScrollBar.Page = 401
+  VertScrollBar.Page = 649
   AutoScroll = True
   Caption = 'Form1'
-  ClientHeight = 0
-  ClientWidth = 0
-  DesignTimePPI = 144
+  ClientHeight = 649
+  ClientWidth = 1263
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnMouseWheel = FormMouseWheel
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object Image2: TImage
     AnchorSideLeft.Control = Image4
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Image3
-    Left = 879
-    Height = 552
-    Top = 15
-    Width = 459
+    Left = 532
+    Height = 368
+    Top = 10
+    Width = 306
     Anchors = [akTop]
-    BorderSpacing.Left = 15
-    BorderSpacing.Top = 15
-    BorderSpacing.Right = 15
+    BorderSpacing.Left = 10
+    BorderSpacing.Top = 10
+    BorderSpacing.Right = 10
     Center = True
     OnClick = Image2Click
     OnDblClick = Image2DblClick
@@ -228,13 +227,13 @@ object Form1: TForm1
     AnchorSideLeft.Control = Image2
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 1353
-    Height = 552
-    Top = 15
-    Width = 459
-    BorderSpacing.Left = 15
-    BorderSpacing.Top = 15
-    BorderSpacing.Right = 15
+    Left = 848
+    Height = 368
+    Top = 10
+    Width = 306
+    BorderSpacing.Left = 10
+    BorderSpacing.Top = 10
+    BorderSpacing.Right = 10
     Center = True
     OnClick = Image3Click
     OnDblClick = Image3DblClick
@@ -434,14 +433,14 @@ object Form1: TForm1
     AnchorSideLeft.Control = Image3
     AnchorSideTop.Control = Image3
     AnchorSideTop.Side = asrBottom
-    Left = 1398
-    Height = 36
-    Top = 589
-    Width = 274
-    BorderSpacing.Left = 45
-    BorderSpacing.Top = 22
+    Left = 878
+    Height = 24
+    Top = 393
+    Width = 183
+    BorderSpacing.Left = 30
+    BorderSpacing.Top = 15
     Font.CharSet = RUSSIAN_CHARSET
-    Font.Height = -20
+    Font.Height = -13
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Items.Strings = (
@@ -449,12 +448,12 @@ object Form1: TForm1
       'Item1'
       'Item2'
     )
-    ItemHeight = 28
+    ItemHeight = 17
+    ParentFont = False
+    TabOrder = 0
     OnClick = ListBox1Click
     OnMouseUp = ListBox1MouseUp
     OnMouseWheelDown = ListBox1MouseWheelDown
-    ParentFont = False
-    TabOrder = 0
   end
   object Label1: TLabel
     AnchorSideLeft.Control = Image2
@@ -463,16 +462,16 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = ListBox1
     AnchorSideBottom.Control = Label2
-    Left = 1279
-    Height = 32
-    Top = 589
-    Width = 74
+    Left = 799
+    Height = 21
+    Top = 393
+    Width = 49
     Anchors = [akTop, akRight]
-    BorderSpacing.Top = 22
-    BorderSpacing.Bottom = 22
+    BorderSpacing.Top = 15
+    BorderSpacing.Bottom = 15
     Caption = 'Region'
     Font.CharSet = RUSSIAN_CHARSET
-    Font.Height = -24
+    Font.Height = -16
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     ParentColor = False
@@ -484,15 +483,15 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     AnchorSideRight.Side = asrBottom
-    Left = 1287
-    Height = 32
-    Top = 643
-    Width = 66
+    Left = 804
+    Height = 21
+    Top = 429
+    Width = 44
     Anchors = [akTop, akRight]
-    BorderSpacing.Top = 15
+    BorderSpacing.Top = 10
     Caption = 'Exams'
     Font.CharSet = RUSSIAN_CHARSET
-    Font.Height = -24
+    Font.Height = -16
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     ParentColor = False
@@ -503,14 +502,14 @@ object Form1: TForm1
     AnchorSideLeft.Control = Image3
     AnchorSideTop.Control = ListBox1
     AnchorSideTop.Side = asrBottom
-    Left = 1398
-    Height = 36
-    Top = 647
-    Width = 274
-    BorderSpacing.Left = 45
-    BorderSpacing.Top = 22
+    Left = 878
+    Height = 24
+    Top = 432
+    Width = 183
+    BorderSpacing.Left = 30
+    BorderSpacing.Top = 15
     Font.CharSet = RUSSIAN_CHARSET
-    Font.Height = -20
+    Font.Height = -13
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Items.Strings = (
@@ -518,24 +517,24 @@ object Form1: TForm1
       'Item1'
       'Item2'
     )
-    ItemHeight = 28
-    OnClick = ListBox2Click
+    ItemHeight = 17
     ParentFont = False
     TabOrder = 1
+    OnClick = ListBox2Click
   end
   object Label3: TLabel
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = ListBox3
-    Left = 1253
-    Height = 32
-    Top = 720
-    Width = 100
+    Left = 780
+    Height = 21
+    Top = 480
+    Width = 68
     Anchors = [akTop, akRight]
-    BorderSpacing.Top = 45
+    BorderSpacing.Top = 30
     Caption = 'Programs'
     Font.CharSet = RUSSIAN_CHARSET
-    Font.Height = -24
+    Font.Height = -16
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     ParentColor = False
@@ -549,36 +548,36 @@ object Form1: TForm1
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 1398
-    Height = 350
-    Top = 713
-    Width = 369
+    Left = 878
+    Height = 232
+    Top = 476
+    Width = 246
     Anchors = [akTop, akLeft, akRight, akBottom]
-    BorderSpacing.Left = 45
-    BorderSpacing.Top = 30
-    BorderSpacing.Right = 45
-    BorderSpacing.Bottom = 45
+    BorderSpacing.Left = 30
+    BorderSpacing.Top = 20
+    BorderSpacing.Right = 30
+    BorderSpacing.Bottom = 30
     Items.Strings = (
       'Protocol1'
     )
-    ItemHeight = 25
-    OnClick = ListBox3Click
+    ItemHeight = 15
     TabOrder = 2
+    OnClick = ListBox3Click
   end
   object ListBox4: TListBox
     AnchorSideLeft.Control = Image4
     AnchorSideTop.Control = Button2
     AnchorSideTop.Side = asrBottom
-    Left = 408
-    Height = 344
-    Top = 663
-    Width = 444
-    BorderSpacing.Left = 3
-    BorderSpacing.Top = 15
+    Left = 218
+    Height = 229
+    Top = 442
+    Width = 296
+    BorderSpacing.Left = 2
+    BorderSpacing.Top = 10
     ItemHeight = 0
+    TabOrder = 3
     OnClick = ListBox4Click
     OnDblClick = ListBox4DblClick
-    TabOrder = 3
   end
   object Button2: TButton
     AnchorSideLeft.Control = Image4
@@ -587,18 +586,18 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Side = asrCenter
     AnchorSideBottom.Control = ListBox4
-    Left = 579
-    Height = 48
-    Top = 591
-    Width = 111
-    BorderSpacing.Left = 15
-    BorderSpacing.Top = 15
-    BorderSpacing.Right = 15
-    BorderSpacing.Bottom = 15
-    BorderSpacing.Around = 9
+    Left = 332
+    Height = 32
+    Top = 394
+    Width = 74
+    BorderSpacing.Left = 10
+    BorderSpacing.Top = 10
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
+    BorderSpacing.Around = 6
     Caption = 'Apply'
-    OnClick = Button2Click
     TabOrder = 4
+    OnClick = Button2Click
   end
   object Button3: TButton
     AnchorSideLeft.Control = Button2
@@ -607,43 +606,43 @@ object Form1: TForm1
     AnchorSideRight.Control = Image4
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = ListBox4
-    Left = 735
-    Height = 51
-    Top = 591
-    Width = 112
+    Left = 436
+    Height = 34
+    Top = 394
+    Width = 75
     Anchors = [akTop, akRight]
-    BorderSpacing.Left = 15
-    BorderSpacing.Top = 15
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 15
-    BorderSpacing.Around = 9
+    BorderSpacing.Left = 10
+    BorderSpacing.Top = 10
+    BorderSpacing.Right = 5
+    BorderSpacing.Bottom = 10
+    BorderSpacing.Around = 6
     Caption = 'Cancel'
-    OnClick = Button3Click
     TabOrder = 5
+    OnClick = Button3Click
   end
   object Button4: TButton
     AnchorSideLeft.Control = ListBox4
     AnchorSideTop.Control = ListBox4
     AnchorSideTop.Side = asrBottom
-    Left = 408
-    Height = 48
-    Top = 1022
-    Width = 111
-    BorderSpacing.Top = 15
+    Left = 218
+    Height = 32
+    Top = 681
+    Width = 74
+    BorderSpacing.Top = 10
     Caption = 'Stop'
-    OnClick = Button4Click
     TabOrder = 6
+    OnClick = Button4Click
   end
   object Button5: TButton
     AnchorSideLeft.Control = ListBox4
     AnchorSideTop.Control = ListBox4
     AnchorSideTop.Side = asrBottom
-    Left = 536
-    Height = 48
-    Top = 1022
-    Width = 111
-    BorderSpacing.Left = 128
-    BorderSpacing.Top = 15
+    Left = 303
+    Height = 32
+    Top = 681
+    Width = 74
+    BorderSpacing.Left = 85
+    BorderSpacing.Top = 10
     Caption = 'Continue'
     TabOrder = 7
   end
@@ -651,56 +650,56 @@ object Form1: TForm1
     AnchorSideLeft.Control = ListBox4
     AnchorSideTop.Control = ListBox4
     AnchorSideTop.Side = asrBottom
-    Left = 663
-    Height = 48
-    Top = 1022
-    Width = 111
-    BorderSpacing.Left = 255
-    BorderSpacing.Top = 15
+    Left = 388
+    Height = 32
+    Top = 681
+    Width = 74
+    BorderSpacing.Left = 170
+    BorderSpacing.Top = 10
     Caption = 'Skip'
-    OnClick = Button6Click
     TabOrder = 8
+    OnClick = Button6Click
   end
   object Button7: TButton
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = ListBox3
-    Left = 1217
-    Height = 45
-    Top = 767
-    Width = 136
+    Left = 757
+    Height = 30
+    Top = 511
+    Width = 91
     Anchors = [akTop, akRight]
-    BorderSpacing.Top = 15
+    BorderSpacing.Top = 10
     Caption = '<< Add'
-    OnClick = Button7Click
     TabOrder = 9
+    OnClick = Button7Click
   end
   object Button8: TButton
     AnchorSideLeft.Control = ListBox4
     AnchorSideTop.Control = ListBox4
     AnchorSideTop.Side = asrBottom
-    Left = 790
-    Height = 48
-    Top = 1022
-    Width = 111
-    BorderSpacing.Left = 382
-    BorderSpacing.Top = 15
+    Left = 473
+    Height = 32
+    Top = 681
+    Width = 74
+    BorderSpacing.Left = 255
+    BorderSpacing.Top = 10
     Caption = 'Delete'
-    OnClick = Button8Click
     TabOrder = 10
+    OnClick = Button8Click
   end
   object Image4: TImage
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Image2
     AnchorSideBottom.Control = Button1
-    Left = 405
-    Height = 552
-    Top = 15
-    Width = 459
+    Left = 216
+    Height = 368
+    Top = 10
+    Width = 306
     Anchors = [akTop, akRight]
-    BorderSpacing.Left = 15
-    BorderSpacing.Top = 15
-    BorderSpacing.Right = 15
+    BorderSpacing.Left = 10
+    BorderSpacing.Top = 10
+    BorderSpacing.Right = 10
     Center = True
     OnClick = Image4Click
     OnDblClick = Image4DblClick
@@ -904,28 +903,28 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Button2
     AnchorSideBottom.Control = ListBox4
-    Left = 414
-    Height = 48
-    Top = 591
-    Width = 114
-    BorderSpacing.Top = 15
-    BorderSpacing.Right = 15
-    BorderSpacing.Bottom = 15
-    BorderSpacing.Around = 9
+    Left = 222
+    Height = 32
+    Top = 394
+    Width = 76
+    BorderSpacing.Top = 10
+    BorderSpacing.Right = 10
+    BorderSpacing.Bottom = 10
+    BorderSpacing.Around = 6
     Caption = 'Scan'
-    OnClick = Button1Click
     TabOrder = 11
+    OnClick = Button1Click
   end
   object Scan_bar: TProgressBar
     AnchorSideLeft.Control = Button4
     AnchorSideTop.Control = Button4
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = ListBox4
-    Left = 408
-    Height = 30
-    Top = 1078
-    Width = 150
-    BorderSpacing.Top = 8
+    Left = 218
+    Height = 20
+    Top = 718
+    Width = 100
+    BorderSpacing.Top = 5
     Color = 13308172
     OnContextPopup = Scan_barContextPopup
     ParentColor = False
@@ -934,61 +933,63 @@ object Form1: TForm1
   object Edit1: TEdit
     AnchorSideLeft.Control = Image4
     AnchorSideTop.Control = Image4
-    Left = 405
-    Height = 34
-    Top = 15
-    Width = 120
+    Left = 216
+    Height = 23
+    Top = 10
+    Width = 80
     AutoSize = False
     AutoSelect = False
-    OnChange = Edit1Change
     ParentColor = True
     TabOrder = 13
     Text = '0.'
+    OnChange = Edit1Change
   end
   object Edit2: TEdit
     AnchorSideLeft.Control = Image2
     AnchorSideTop.Control = Image2
-    Left = 879
-    Height = 33
-    Top = 15
-    Width = 120
-    OnChange = Edit1Change
+    Left = 532
+    Height = 23
+    Top = 10
+    Width = 80
     TabOrder = 14
     Text = '0.'
+    OnChange = Edit1Change
   end
   object Edit3: TEdit
     AnchorSideLeft.Control = Image3
     AnchorSideTop.Control = Image3
-    Left = 1353
-    Height = 33
-    Top = 15
-    Width = 120
-    OnChange = Edit1Change
+    Left = 848
+    Height = 23
+    Top = 10
+    Width = 80
     TabOrder = 15
     Text = '0.'
+    OnChange = Edit1Change
   end
   object ListBox5: TListBox
     AnchorSideLeft.Control = ListBox4
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = ListBox4
-    Left = 857
-    Height = 344
-    Top = 663
-    Width = 135
-    BorderSpacing.Left = 5
+    Left = 517
+    Height = 229
+    Top = 442
+    Width = 90
+    BorderSpacing.Left = 3
     ItemHeight = 0
     TabOrder = 16
   end
   object Label4: TLabel
+    AnchorSideLeft.Control = ListBox5
+    AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = ListBox5
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = ListBox5
-    Left = 896
-    Height = 25
-    Top = 628
-    Width = 48
+    Left = 546
+    Height = 15
+    Top = 420
+    Width = 32
     Anchors = [akLeft, akBottom]
-    BorderSpacing.Bottom = 10
+    BorderSpacing.Bottom = 7
     Caption = 'Status'
     ParentColor = False
     OnClick = Label4Click
@@ -996,7 +997,7 @@ object Form1: TForm1
   object bar_timer: TTimer
     Enabled = False
     OnTimer = bar_timerTimer
-    Left = 108
-    Top = 1080
+    Left = 72
+    Top = 720
   end
 end
