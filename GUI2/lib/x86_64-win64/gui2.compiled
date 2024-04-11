@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Compiler Value="C:\lazarus\fpc\3.2.2\bin\x86_64-win64\fpc.exe" Date="1482330472"/>
-  <Params Value=" -MObjFPC -Scghi -O1 -gw3 -gl -WG -l -vewnhibq -FiD:\MRI_GUI\gui_main\mri_gui_2_0\GUI2\lib\x86_64-win64 -FuC:\lazarus\lcl\units\x86_64-win64\win32 -FuC:\lazarus\lcl\units\x86_64-win64 -FuC:\lazarus\components\freetype\lib\x86_64-win64 -FuC:\lazarus\components\lazutils\lib\x86_64-win64 -FuC:\lazarus\packager\units\x86_64-win64 -FuD:\MRI_GUI\gui_main\mri_gui_2_0\GUI2\ -FUD:\MRI_GUI\gui_main\mri_gui_2_0\GUI2\lib\x86_64-win64\ -FED:\MRI_GUI\gui_main\mri_gui_2_0\GUI2\ -oD:\MRI_GUI\gui_main\mri_gui_2_0\GUI2\gui2.exe -dLCL -dLCLwin32 gui2.lpr"/>
+  <Compiler Value="C:\lazarus\fpc\3.2.2\bin\x86_64-win64\fpc.exe" Date="1449427374"/>
+  <Params Value=" -MObjFPC -Scghi -O1 -gw3 -gl -WG -l -vewnhibq -FiC:\lazarus_proj\gui_main\mri_gui_2_0\GUI2\lib\x86_64-win64 -FuC:\lazarus\lcl\units\x86_64-win64\win32 -FuC:\lazarus\lcl\units\x86_64-win64 -FuC:\lazarus\components\freetype\lib\x86_64-win64 -FuC:\lazarus\components\lazutils\lib\x86_64-win64 -FuC:\lazarus\packager\units\x86_64-win64 -FuC:\lazarus_proj\gui_main\mri_gui_2_0\GUI2\ -FUC:\lazarus_proj\gui_main\mri_gui_2_0\GUI2\lib\x86_64-win64\ -FEC:\lazarus_proj\gui_main\mri_gui_2_0\GUI2\ -oC:\lazarus_proj\gui_main\mri_gui_2_0\GUI2\gui2.exe -dLCL -dLCLwin32 gui2.lpr"/>
 </CONFIG>

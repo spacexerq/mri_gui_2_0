@@ -37,6 +37,7 @@ type
     ListBox2: TListBox;
     ListBox3: TListBox;
     ListBox4: TListBox;
+    ListBox5: TListBox; //Список статусов
     Scan_bar: TProgressBar;
     bar_timer: TTimer;
     procedure bar_timerStartTimer(Sender: TObject);
@@ -252,6 +253,7 @@ procedure TForm1.Button7Click(Sender: TObject);            // Добавлени
 begin
      if  Listbox3.ItemIndex>-1  then
      Listbox4.Items.Add(Listbox3.Items.Strings[Listbox3.ItemIndex]);
+     Listbox5.Items.Add('added');
 end;
 
 procedure TForm1.Button8Click(Sender: TObject);            // Удаление элемента из списка протоколов
@@ -728,6 +730,7 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);      // "Cancel" button
 begin
   Listbox4.clear;
+  Listbox5.clear;
   Listbox1.ItemIndex:=0;
   Listbox2.ItemIndex:=0;
   x1:=Normed_len*Sqrt(2)/2;
@@ -779,6 +782,7 @@ procedure TForm1.Button1Click(Sender: TObject); //"Scan" button
 var
   Picture2, Picture3, Picture4: TPicture;
 begin
+     Listbox5.Items[Listbox4.ItemIndex] := 'scanned';
      Picture2 := TPicture.Create;
      Picture3 := TPicture.Create;
      Picture4 := TPicture.Create;
