@@ -33,6 +33,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
     ListBox1: TListBox;
     ListBox2: TListBox;
     ListBox3: TListBox;
@@ -101,6 +102,7 @@ type
 
     procedure Label1Click(Sender: TObject);
     procedure Label2Click(Sender: TObject);
+    procedure Label4Click(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
     procedure ListBox1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -685,6 +687,11 @@ begin
 end;
 
 procedure TForm1.Label2Click(Sender: TObject);
+begin
+
+end;
+
+procedure TForm1.Label4Click(Sender: TObject);
 begin
 
 end;

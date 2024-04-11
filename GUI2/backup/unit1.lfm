@@ -1,14 +1,14 @@
 object Form1: TForm1
-  Left = -85
+  Left = 342
   Height = 974
-  Top = 122
+  Top = 176
   Width = 1920
-  HorzScrollBar.Page = 675
+  HorzScrollBar.Page = 944
   VertScrollBar.Page = 974
   AutoScroll = True
   Caption = 'Form1'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 974
+  ClientWidth = 1894
   DesignTimePPI = 144
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
@@ -974,10 +974,24 @@ object Form1: TForm1
     Left = 857
     Height = 344
     Top = 663
-    Width = 208
+    Width = 135
     BorderSpacing.Left = 5
     ItemHeight = 0
     TabOrder = 16
+  end
+  object Label4: TLabel
+    AnchorSideTop.Control = ListBox5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = ListBox5
+    Left = 896
+    Height = 25
+    Top = 628
+    Width = 48
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Bottom = 10
+    Caption = 'Status'
+    ParentColor = False
+    OnClick = Label4Click
   end
   object bar_timer: TTimer
     Enabled = False
