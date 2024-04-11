@@ -837,6 +837,7 @@ procedure TForm1.Button2Click(Sender: TObject); //Rotation matrices output
 begin
   Assignfile(Slice_pos_file,'Slice_pos_file.txt');
   try
+    Listbox5.Items[Listbox4.ItemIndex] := 'applied';
     rewrite(Slice_pos_file);  // для бесконечной записи в файл используй reset
     append(Slice_pos_file);
     writeln(Slice_pos_file,'Номер среза' , ' ', 'Проекция',' ','Смещение по Y',' ', 'Градус поворота');

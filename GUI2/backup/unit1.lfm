@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 198
+  Left = 317
   Height = 890
-  Top = 107
+  Top = 74
   Width = 1363
-  HorzScrollBar.Page = 744
+  HorzScrollBar.Page = 675
   VertScrollBar.Page = 890
   AutoScroll = True
   Caption = 'Form1'
@@ -968,10 +968,14 @@ object Form1: TForm1
     Text = '0.'
   end
   object ListBox5: TListBox
-    Left = 536
+    AnchorSideLeft.Control = ListBox4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ListBox4
+    Left = 531
     Height = 281
     Top = 663
     Width = 208
+    BorderSpacing.Left = 5
     ItemHeight = 0
     TabOrder = 16
   end

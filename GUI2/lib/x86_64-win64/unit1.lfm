@@ -1,14 +1,14 @@
 object Form1: TForm1
-  Left = 198
-  Height = 890
-  Top = 107
-  Width = 1363
-  HorzScrollBar.Page = 744
-  VertScrollBar.Page = 890
+  Left = -11
+  Height = 974
+  Top = -11
+  Width = 1920
+  HorzScrollBar.Page = 675
+  VertScrollBar.Page = 974
   AutoScroll = True
   Caption = 'Form1'
-  ClientHeight = 890
-  ClientWidth = 1337
+  ClientHeight = 974
+  ClientWidth = 1894
   DesignTimePPI = 144
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
@@ -19,7 +19,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = Image4
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Image3
-    Left = 553
+    Left = 879
     Height = 552
     Top = 15
     Width = 459
@@ -228,7 +228,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = Image2
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 1027
+    Left = 1353
     Height = 552
     Top = 15
     Width = 459
@@ -434,7 +434,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = Image3
     AnchorSideTop.Control = Image3
     AnchorSideTop.Side = asrBottom
-    Left = 1072
+    Left = 1398
     Height = 36
     Top = 589
     Width = 274
@@ -463,7 +463,7 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = ListBox1
     AnchorSideBottom.Control = Label2
-    Left = 953
+    Left = 1279
     Height = 32
     Top = 589
     Width = 74
@@ -484,7 +484,7 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     AnchorSideRight.Side = asrBottom
-    Left = 961
+    Left = 1287
     Height = 32
     Top = 643
     Width = 66
@@ -503,7 +503,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = Image3
     AnchorSideTop.Control = ListBox1
     AnchorSideTop.Side = asrBottom
-    Left = 1072
+    Left = 1398
     Height = 36
     Top = 647
     Width = 274
@@ -527,7 +527,7 @@ object Form1: TForm1
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = ListBox3
-    Left = 927
+    Left = 1253
     Height = 32
     Top = 720
     Width = 100
@@ -549,7 +549,7 @@ object Form1: TForm1
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 1072
+    Left = 1398
     Height = 350
     Top = 713
     Width = 369
@@ -569,7 +569,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = Image4
     AnchorSideTop.Control = Button2
     AnchorSideTop.Side = asrBottom
-    Left = 82
+    Left = 408
     Height = 344
     Top = 663
     Width = 444
@@ -587,7 +587,7 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Side = asrCenter
     AnchorSideBottom.Control = ListBox4
-    Left = 253
+    Left = 579
     Height = 48
     Top = 591
     Width = 111
@@ -607,7 +607,7 @@ object Form1: TForm1
     AnchorSideRight.Control = Image4
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = ListBox4
-    Left = 409
+    Left = 735
     Height = 51
     Top = 591
     Width = 112
@@ -625,7 +625,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = ListBox4
     AnchorSideTop.Control = ListBox4
     AnchorSideTop.Side = asrBottom
-    Left = 82
+    Left = 408
     Height = 48
     Top = 1022
     Width = 111
@@ -638,7 +638,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = ListBox4
     AnchorSideTop.Control = ListBox4
     AnchorSideTop.Side = asrBottom
-    Left = 210
+    Left = 536
     Height = 48
     Top = 1022
     Width = 111
@@ -651,7 +651,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = ListBox4
     AnchorSideTop.Control = ListBox4
     AnchorSideTop.Side = asrBottom
-    Left = 337
+    Left = 663
     Height = 48
     Top = 1022
     Width = 111
@@ -665,7 +665,7 @@ object Form1: TForm1
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = ListBox3
-    Left = 891
+    Left = 1217
     Height = 45
     Top = 767
     Width = 136
@@ -679,7 +679,7 @@ object Form1: TForm1
     AnchorSideLeft.Control = ListBox4
     AnchorSideTop.Control = ListBox4
     AnchorSideTop.Side = asrBottom
-    Left = 464
+    Left = 790
     Height = 48
     Top = 1022
     Width = 111
@@ -693,7 +693,7 @@ object Form1: TForm1
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Image2
     AnchorSideBottom.Control = Button1
-    Left = 79
+    Left = 405
     Height = 552
     Top = 15
     Width = 459
@@ -904,7 +904,7 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Button2
     AnchorSideBottom.Control = ListBox4
-    Left = 88
+    Left = 414
     Height = 48
     Top = 591
     Width = 114
@@ -921,7 +921,7 @@ object Form1: TForm1
     AnchorSideTop.Control = Button4
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = ListBox4
-    Left = 82
+    Left = 408
     Height = 30
     Top = 1078
     Width = 150
@@ -934,7 +934,7 @@ object Form1: TForm1
   object Edit1: TEdit
     AnchorSideLeft.Control = Image4
     AnchorSideTop.Control = Image4
-    Left = 79
+    Left = 405
     Height = 34
     Top = 15
     Width = 120
@@ -948,7 +948,7 @@ object Form1: TForm1
   object Edit2: TEdit
     AnchorSideLeft.Control = Image2
     AnchorSideTop.Control = Image2
-    Left = 553
+    Left = 879
     Height = 33
     Top = 15
     Width = 120
@@ -959,7 +959,7 @@ object Form1: TForm1
   object Edit3: TEdit
     AnchorSideLeft.Control = Image3
     AnchorSideTop.Control = Image3
-    Left = 1027
+    Left = 1353
     Height = 33
     Top = 15
     Width = 120
@@ -968,10 +968,14 @@ object Form1: TForm1
     Text = '0.'
   end
   object ListBox5: TListBox
-    Left = 536
-    Height = 281
+    AnchorSideLeft.Control = ListBox4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ListBox4
+    Left = 857
+    Height = 344
     Top = 663
     Width = 208
+    BorderSpacing.Left = 5
     ItemHeight = 0
     TabOrder = 16
   end
