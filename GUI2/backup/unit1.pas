@@ -585,7 +585,7 @@ begin
   begin
   angle_y := +3.14159/rotation_scale;
   end;
-  curr_angle_y := curr_angle_y + angle_y/3.14159*360;
+  curr_angle_y := (curr_angle_y + angle_y/3.14159*360) mod 360;
   Edit1.Caption:=IntToStr(Round(curr_angle_y));
 
   rot_y[2][2] := Cos(angle_y);

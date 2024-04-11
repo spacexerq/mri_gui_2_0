@@ -37,6 +37,7 @@ type
     ListBox2: TListBox;
     ListBox3: TListBox;
     ListBox4: TListBox;
+    ListBox5: TListBox;
     Scan_bar: TProgressBar;
     bar_timer: TTimer;
     procedure bar_timerStartTimer(Sender: TObject);
