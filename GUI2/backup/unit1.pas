@@ -349,13 +349,13 @@ begin
   rot_x[3][3] := Cos(angle_x);
   rot_x[1][3] := Sin(angle_x);
   rot_x[3][1] := -Sin(angle_x);
-  x1:= rot_x[1][1]*x1 - rot_x[1][3]*z1;
+  x1:= rot_x[1][1]*x1 + rot_x[1][3]*z1;
   z1:= rot_x[3][1]*x1 + rot_x[3][3]*z1;
-  x2:= rot_x[1][1]*x2 - rot_x[1][3]*z2;
+  x2:= rot_x[1][1]*x2 + rot_x[1][3]*z2;
   z2:= rot_x[3][1]*x2 + rot_x[3][3]*z2;
-  x3:= rot_x[1][1]*x3 - rot_x[1][3]*z3;
+  x3:= rot_x[1][1]*x3 + rot_x[1][3]*z3;
   z3:= rot_x[3][1]*x3 + rot_x[3][3]*z3;
-  x4:= rot_x[1][1]*x4 - rot_x[1][3]*z4;
+  x4:= rot_x[1][1]*x4 + rot_x[1][3]*z4;
   z4:= rot_x[3][1]*x4 + rot_x[3][3]*z4;
   end;
   //драг мышкой
